@@ -1,4 +1,4 @@
-import { CREATE_TODO, REMOVE_TODO } from "./actions";
+import { CREATE_TODO, REMOVE_TODO, COMPLETE_TODO } from "./actions";
 
 export const todos = (state = [], action) => {
 
@@ -17,14 +17,15 @@ export const todos = (state = [], action) => {
             const { text } = payload;
             return state.filter(todo => todo.text !== text);
         }
-        // case COMPLETE_TODO: {
-        //     const { text } = payload;
-        //     const completedTodo = {
-        //         text,
-        //         isCompleted: true,
-        //     }
-        //     return state.concat(completedTodo)
-        // }
+        case COMPLETE_TODO: {
+            const { text } = payload;
+            return state.map(todo => {
+                if (todo.text === text) {
+                    return { ...todo, isCompleted: true };
+                }
+                return todo;            
+            })
+        }
         default:
             return state;
     }    
