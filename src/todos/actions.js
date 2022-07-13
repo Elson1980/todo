@@ -14,9 +14,9 @@ export const removeTodo = text => ({
     payload: { text }
 });
 
-export const COMPLETE_TODO = 'COMPLETE_TODO';
+// export const COMPLETE_TODO = 'COMPLETE_TODO';
 
-export const completeTodo = text => ({
-    type: COMPLETE_TODO,
-    payload: { text }
-});
+// export const completeTodo = text => ({
+//     type: COMPLETE_TODO,
+//     payload: { text }
+// });
