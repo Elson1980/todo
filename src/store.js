@@ -27,4 +27,4 @@ export const configureStore = () =>
         composeWithDevTools(
             applyMiddleware(thunk)
         )
-        );
+    );
