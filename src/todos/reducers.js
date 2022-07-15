@@ -1,4 +1,11 @@
-import { CREATE_TODO, REMOVE_TODO, COMPLETE_TODO, LOAD_TODOS_IN_PROGRESS, LOAD_TODOS_SUCCESS, LOAD_TODOS_FAILURE } from "./actions";
+import { 
+    CREATE_TODO, 
+    REMOVE_TODO, 
+    COMPLETE_TODO, 
+    LOAD_TODOS_IN_PROGRESS, 
+    LOAD_TODOS_SUCCESS, 
+    LOAD_TODOS_FAILURE, 
+} from "./actions";
 
 const initialState = { isloading: false, data: [] };
 
