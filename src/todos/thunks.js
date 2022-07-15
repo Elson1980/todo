@@ -1,4 +1,4 @@
-import { createTodo, removeTodo, loadTodosInProgress, loadTodosSuccess, loadTodosFailure } from "./actions";
+import { createTodo, removeTodo, loadTodosInProgress, loadTodosSuccess, loadTodosFailure, completeTodo } from "./actions";
 
 export const loadTodos = () => async (dispatch, getState) => {    
     try {
@@ -47,7 +47,7 @@ export const updateTodoRequest = id => async dispatch => {
            method: 'post',
         });
         const update = await response.json();
-        dispatch(updatedTodo(update))
+        dispatch(completeTodo(update))
     } catch {
         dispatch(displayAlert(e));
     };
