@@ -10,22 +10,19 @@ const TodoItemContainer = styled.div`
     box-shadow: 0 4px 8px grey;
 `;
 
-const TodoItemButtonContainer = styled.div`
+const TodoItemContainerWithWarning = styled(TodoItemContainer)`
+    border-bottom: ${props => (new Date(props.createdAt) > new Date(Date.now() - 8640000 * 5)
+        ? 'none'
+        : '2px solid red')};
+`;
+
+const ButtonsContainer = styled.div`
     position: absolute;
     right: 12px;
     bottom: 12px;
 `;
 
-const TodoItemButton = styled.div`
-    font-size: 16px;
-    padding: 8px;
-    border: none;
-    border-radius: 8px;
-    outline: none;
-    cursor: pointer;
-`;
-
-const TodoItemCompleted = styled.div`
+const Button = styled.button`
     font-size: 16px;
     padding: 8px;
     border: none;
@@ -33,25 +30,33 @@ const TodoItemCompleted = styled.div`
     outline: none;
     cursor: pointer;
     display: inline-block;
+`;
+
+const TodoItemCompleted = styled(Button)`
     background-color: #22ee22;
 `;
 
-const TodoItemRemove = styled.div`
-    font-size: 16px;
-    padding: 8px;
-    border: none;
-    border-radius: 8px;
-    outline: none;
-    cursor: pointer;
-    display: inline-block;
+const TodoItemRemove = styled(Button)`
+
     background-color: #ee2222;
     margin-left: 8px;   
 `;
 
-const TodoListItem = ({ todo, onRemovePressed, onCompletePressed }) => (
-    <TodoItemContainer>
+
+
+const TodoListItem = ({ todo, onRemovePressed, onCompletePressed }) => {
+
+    const Container = todo.isCompleted ? TodoItemContainer : TodoItemContainerWithWarning;
+
+    return (
+
+    <Container createdAt={todo.createdAt}>
         <h3>{todo.text}</h3>
-        <TodoItemButtonContainer>        
+        <p>
+            Created at:&nbsp;
+            {(new Date(todo.createdAt)).toLocaleDateString()}
+        </p>
+        <ButtonsContainer>        
         {todo.isCompleted
             ? null : 
             <TodoItemCompleted
@@ -64,8 +69,9 @@ const TodoListItem = ({ todo, onRemovePressed, onCompletePressed }) => (
             onClick={() => onRemovePressed(todo.id)}
             >
             Remove</TodoItemRemove>
-        </TodoItemButtonContainer>
-    </TodoItemContainer>
-);
+        </ButtonsContainer>
+    </Container>
+    );
+};
 
 export default TodoListItem;

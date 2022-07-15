@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import NewTodoForm from './NewTodoForm';
 import TodoListItem from './TodoListItem';
-import { getTodos, getTodosLoading, getIncompleteTodos, getCompletedTodos } from './selectors';
+import { getTodosLoading, getIncompleteTodos, getCompletedTodos } from './selectors';
 import { loadTodos, removeTodoRequest, updateTodoRequest } from './thunks';
-import { isLoading } from './reducers';
 
 const ListWrapper = styled.div`
     max-width: 700px;
@@ -52,7 +51,6 @@ const mapDispatchToProps = dispatch => ({
     startLoadingTodos: () => dispatch(loadTodos()),
     onRemovePressed: id => dispatch(removeTodoRequest(id)),
     onCompletePressed: id => dispatch(updateTodoRequest(id)),
-    onDisplayAlertClicked: text => dispatch(displayAlert(text))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
