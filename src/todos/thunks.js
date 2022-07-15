@@ -38,8 +38,20 @@ export const removeTodoRequest = id => async dispatch => {
         dispatch(removeTodo(removedTodo));
     } catch (e) {
         dispatch(displayAlert(e));
-    }
-}
+    };
+};
+
+export const updateTodoRequest = id => async dispatch => {
+    try {
+        const response = await fetch(`http://localhost:8080/todos/${id}/completed`, {
+           method: 'post',
+        });
+        const update = await response.json();
+        dispatch(updatedTodo(update))
+    } catch {
+        dispatch(displayAlert(e));
+    };
+};
 
 export const displayAlert = text => () => {
     alert(text)
